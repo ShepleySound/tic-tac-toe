@@ -5,8 +5,7 @@ body{
     flex-direction: column;
     align-items: center;
 }
-header{
-    text-align: center;
+header, #turn-status{
     font-size: 3em;
 }
 
@@ -15,11 +14,17 @@ header{
     width: 500px;
     display: grid;
     margin: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .board-square{
     background-color: #121212;
     border: 1px solid #363636;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6em;
 }
 
 .board-square:hover{
@@ -31,21 +36,15 @@ header{
 }
 
 div[data-position="0"]{
-    grid-row: 1;
-    grid-column: 1;
     border-left: none;
     border-top: none;
 }
 
 div[data-position="1"]{
-    grid-row: 1;
-    grid-column: 2;
     border-top: none;
 }
 
 div[data-position="2"]{
-    grid-row: 1;
-    grid-column: 3;
     border-top: none;
     border-right: none;
 }
@@ -70,4 +69,8 @@ div[data-position="7"]{
 div[data-position="8"]{
     border-bottom: none;
     border-right: none;
+}
+
+.win-square{
+    filter: brightness(1.6);
 }
