@@ -15,6 +15,11 @@ const gameBoard = (() => {
         }
     }
 
+    const checkDraw = () => {
+        if (!_boardArray.includes("")){
+            return true
+        }
+    }
     const checkWin = (player) => {
         const rows = [0, 3, 6]
         const columns = [0, 1, 2]
@@ -42,6 +47,9 @@ const gameBoard = (() => {
             gameStatus.disableTurn()
             displayController.winGame([2, 4, 6], player)
             return true
+        }
+        if (checkDraw()){
+            displayController.drawGame()
         }
         return false
     }
@@ -142,9 +150,18 @@ const displayController = (() => {
         _turnStatus.innerText = `${player.getName()} Wins!`
     }
 
+    const drawGame = function(){
+        _gridSquares.forEach(square => {
+            square.classList.add("win-square")
+        })
+
+        _turnStatus.innerText = "DRAW"
+    }
+
     return {
         updateDisplay,
         winGame,
+        drawGame,
     }
 })()
 
@@ -159,7 +176,19 @@ const gameSetup = (() => {
 })()
 
 const gameFlow = (() => {
-    const _pcName = "Robert"
+    const _setName = function(){
+        while (true){
+            let name = prompt("Enter your name:")
+            if (name === null || name === ""){
+                continue
+            }
+            if (name.length > 40){
+                continue
+            }
+            return name
+        }
+    }
+    const _pcName = _setName()
     const pc = player(_pcName, 'X')
     const cpu = cpuPlayer("Computer", 'O')
     const makeMove = (position) => {
